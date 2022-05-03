@@ -1,6 +1,6 @@
 ###############################################################
 #Step 1 - compile data from all sensors into one object and load sun times data
-template <- read_sensor_data("~/Box/Stringybark_dieback/Students_projects_dieback/microclimate_R/KA/KA*")
+template <- read_sensor_data("/KA/KA*")
 
 #the 'template' object returned above should have all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
 
