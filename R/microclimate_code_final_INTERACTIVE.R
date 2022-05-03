@@ -7,7 +7,7 @@ my.sensor.data <- read_sensor_data("/KA/KA*")
 ##################################
 
 #Load sun rise/set times data::
-#data are downloaded from Geoscience Australia or relevant source elsewhere, and formatted in excel; be careful to download the data in the correct timezone, in this case ACDT
+#data can be downloaded from Geoscience Australia or relevant local source elsewhere, and formatted in excel (e.g. to combine data from different years to cover a climate logging period); be careful to download the data in the correct timezone, in this case ACDT
 #beware of daylight savings - e.g. if data are in ACDT, make sure logged data are too
 
 rise_set <- read.csv("rise_set_times.csv") #e.g.
