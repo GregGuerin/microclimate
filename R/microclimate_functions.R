@@ -446,3 +446,20 @@ return(result)
 
 } #end calculate means function
 
+##################################################
+
+
+#Function 6
+
+
+##################################################
+
+#add times for an hour before and after sun rise and set in order to calculate variables later
+format_sun_times <- function() {
+  
+} #end format_sun_times function
+
+##################################################
+
+
+####################################################
