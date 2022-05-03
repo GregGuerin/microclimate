@@ -4,11 +4,6 @@ template <- read_sensor_data("~/Box/Stringybark_dieback/Students_projects_diebac
 
 #the 'template' object returned above should have all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
 
-##################################
-###Just for this particular dataset:::
-#remove sensor Ka.3.5S as it stops measuring after 3 days
-template <- subset(template, Sensor != "Ka.3.5S")
-
 
 ##################################
 
