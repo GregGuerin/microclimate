@@ -1,1 +1,5 @@
-exportPattern("^[[:alpha:]]+")
+export(read_sensor_data)
+export(format_sensor_data)
+export(calculate_means)
+importFrom("stringr", "str_split_fixed")
+importFrom("dplyr", "inner_join")
