@@ -1,16 +1,21 @@
 ###############################################################
 #Step 1 - compile data from all sensors into one object and load sun times data
-my.sensor.data <- read_sensor_data("/KA/KA*")
 
-#the 'my.sensor.data' object returned above should have all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
+my.sensor.data <- read_sensor_data("/KA/KA*") #input file path to set of .txt files with logged climate measurements
+
+#the 'my.sensor.data' object returned above contains all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
 
 ##################################
-
+#Step 2 - load external sun rise and set times and format for analysis
 #Load sun rise/set times data::
-#data can be downloaded from Geoscience Australia or relevant local source elsewhere, and formatted in excel (e.g. to combine data from different years to cover a climate logging period); be careful to download the data in the correct timezone, in this case ACDT
+
+#data can be downloaded from Geoscience Australia [https://geodesyapps.ga.gov.au/sunrise] or relevant local source elsewhere, and formatted in excel (e.g. to combine data from different years to cover a climate logging period); be careful to download the data in the correct timezone, in this case ACDT
 #beware of daylight savings - e.g. if data are in ACDT, make sure logged data are too
 
 rise_set <- read.csv("rise_set_times.csv") #e.g.
+
+#run formatting function to calculate 1 hour before and after sunset and sunrise
+rise_set <- format_sun_time(rise_set)
 
 ###############################################################
 #Step 2 - process the raw data to include sun times, code as day or night, add season etc
