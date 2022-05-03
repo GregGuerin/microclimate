@@ -455,8 +455,22 @@ return(result)
 ##################################################
 
 #add times for an hour before and after sun rise and set in order to calculate variables later
-format_sun_times <- function() {
+format_sun_times <- function(rise_set) {
+  rise_set$rise_decimal <- rise_set$rise/100
+  rise_set$set_decimal <- rise_set$set/100
   
+  rise_set$rise_plus1time <- rise_set$rise_decimal + 1
+  rise_set$set_plus1time <- rise_set$set_decimal + 1
+  rise_set$rise_minus1time <- rise_set$rise_decimal - 1
+  rise_set$set_minus1time <- rise_set$set_decimal - 1
+  
+#character format
+  rise_set$rise_plus1time <- unlist(lapply(strsplit(as.character(rise_set$rise_plus1time), "\\."), function(x) {return(paste(x[1],x[2], sep=":"))}))
+  rise_set$set_plus1time <- unlist(lapply(strsplit(as.character(rise_set$set_plus1time), "\\."), function(x) {return(paste(x[1],x[2], sep=":"))}))
+  rise_set$rise_minus1time <- unlist(lapply(strsplit(as.character(rise_set$rise_minus1time), "\\."), function(x) {return(paste(x[1],x[2], sep=":"))}))
+  rise_set$set_minus1time <- unlist(lapply(strsplit(as.character(rise_set$set_minus1time), "\\."), function(x) {return(paste(x[1],x[2], sep=":"))}))
+  
+  return(rise_set)
 } #end format_sun_times function
 
 ##################################################
