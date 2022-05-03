@@ -1,4 +1,5 @@
 export(read_sensor_data)
+export(format_sun_times)
 export(format_sensor_data)
 export(calculate_means)
 importFrom("stringr", "str_split_fixed")
