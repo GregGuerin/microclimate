@@ -1,7 +1,7 @@
 ###############################################################
 #Step 1 - compile data from all sensors into one object and load sun times data
 
-my.sensor.data <- read_sensor_data("/Sample_data/KA*") #input file path to set of .txt files with logged climate measurements
+my.sensor.data <- read_sensor_data("./Sample_data/KA*") #input file path to set of .txt files with logged climate measurements
 
 #the 'my.sensor.data' object returned above contains all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
 
@@ -12,7 +12,7 @@ my.sensor.data <- read_sensor_data("/Sample_data/KA*") #input file path to set o
 #data can be downloaded from Geoscience Australia [https://geodesyapps.ga.gov.au/sunrise] or relevant local source elsewhere, and formatted in excel (e.g. to combine data from different years to cover a climate logging period); be careful to download the data in the correct timezone, in this case ACDT
 #beware of daylight savings - e.g. if data are in ACDT, make sure logged data are too
 
-rise_set <- read.csv("/Sample_data/rise_set_combined.csv") #e.g.
+rise_set <- read.csv("./Sample_data/rise_set_combined.csv") #e.g.
 #Copyright: Based on Sunrise, Sunset & Twilight Times, https://geodesyapps.ga.gov.au/sunriseby Geoscience Australia which is © Commonwealth of Australia and is provided under a Creative Commons Attribution 4.0 International Licence and is subject to the disclaimer of warranties in section 5 of that licence.
 
 
