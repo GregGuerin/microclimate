@@ -58,16 +58,17 @@ working_header[c(3,5)] <- c("Celsius(C)", "dewpoint(C)") #manually force new nam
 
 ####################################################
 #define function to assign day or night
-assignDayNight <- function(datevec, riseplusvec, riseminvec, setminvec, setplusvec) {
+assignDayNight <- function(datevec, riseplusvec, riseminvec, setminvec, setplusvec, count_vector) {
+  cat(count_vector)
   if(datevec > riseplusvec && datevec < setminvec) {
-    if(verbose) {cat("Day", "\n")}
+    cat("Day", "\n")
     return("Day")
   } else {
     if(datevec > setplusvec || datevec < riseminvec) {
-      if(verbose) {cat("Night", "\n")}
+      cat("Night", "\n")
       return("Night")
     } else {
-      if(verbose) {cat("Neither night nor day", "\n")}
+      cat("Neither night nor day", "\n")
       return("Twilight_sunrise")
     }} #end if else
 } #end assignDayNight function
@@ -92,7 +93,7 @@ assign_season <- function(x) {
 
 ####################################################
 
-format_sensor_data <- function(template, rise_set, time_zone="Australia/Adelaide", verbose=TRUE) {
+format_sensor_data <- function(template, rise_set, time_zone="ACDT", verbose=TRUE) {
 	
 #this function formats the merged data (especially date and time) for analysis (e.g. season) and adds in the sun times to assign night day etc
 	
@@ -121,16 +122,20 @@ template$date_time <- strptime(template$date_time, format = "%Y-%m-%d %H:%M:%OS"
 #make all the rise and set fields (times) include the date
 #and convert them to POSIXt class
 template$rise_plus1time <- paste(template$Day, template$rise_plus1time, sep = " ")
-template$rise_plus1time <- strptime(template$rise_plus1time, format = "%Y-%m-%d %H:%M:%OS")
+template$rise_plus1time <- sub("NA", "00", template$rise_plus1time)
+template$rise_plus1time <- strptime(template$rise_plus1time, format = "%Y-%m-%d %H:%M")
 
 template$rise_minus1time <- paste(template$Day, template$rise_minus1time, sep = " ")
-template$rise_minus1time <- strptime(template$rise_minus1time, format = "%Y-%m-%d %H:%M:%OS")
+template$rise_minus1time <- sub("NA", "00", template$rise_minus1time)
+template$rise_minus1time <- strptime(template$rise_minus1time, format = "%Y-%m-%d %H:%M")
 
 template$set_plus1time <- paste(template$Day, template$set_plus1time, sep = " ")
-template$set_plus1time <- strptime(template$set_plus1time, format = "%Y-%m-%d %H:%M:%OS")
+template$set_plus1time <- sub("NA", "00", template$set_plus1time)
+template$set_plus1time <- strptime(template$set_plus1time, format = "%Y-%m-%d %H:%M")
 
 template$set_minus1time <- paste(template$Day, template$set_minus1time, sep = " ")
-template$set_minus1time <- strptime(template$set_minus1time, format = "%Y-%m-%d %H:%M:%OS")
+template$set_minus1time <- sub("NA", "00", template$set_minus1time)
+template$set_minus1time <- strptime(template$set_minus1time, format = "%Y-%m-%d %H:%M")
 
 #rename cols to make shorter
 colnames(template)[colnames(template) == "rise_minus1time"] <- "rise_minus1"
@@ -156,7 +161,7 @@ template$set_plus1 <- strptime(template$set_plus1, format = "%Y-%m-%d %H:%M:%OS"
 
 
 #apply function to all observations
-template$day_night <- mapply(assignDayNight, template$date_time, template$rise_plus1, template$rise_minus1, template$set_minus1, template$set_plus1)
+template$day_night <- suppressWarnings(mapply(assignDayNight, template$date_time, template$rise_plus1, template$rise_minus1, template$set_minus1, template$set_plus1, 1:length(template$date_time)))
 
 ###
 #add unique ID for days and nights NOTING that these ARE NOT defined by dates only as the defined night periods are over two dates.
