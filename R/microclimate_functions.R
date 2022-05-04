@@ -145,7 +145,7 @@ template$ID <- seq_along(template[,1])
 ######
 #Assign day or night to each observation
 
-template['day_night'] <- NA #create new EMPTY/na column for day/night to go into
+#template['day_night'] <- NA #create new EMPTY/na column for day/night to go into
 
 #Note, could add this to earlier when these were first defined as times (R class), but here adding 'tz' to each to standardise time zone format so > < operations work consistently
 template$date_time <- strptime(template$date_time, format = "%Y-%m-%d %H:%M:%OS", tz=time_zone)
@@ -160,8 +160,9 @@ template$day_night <- mapply(assignDayNight, template$date_time, template$rise_p
 
 ###
 #add unique ID for days and nights NOTING that these ARE NOT defined by dates only as the defined night periods are over two dates.
-template$day_night_unique <- NA #create unique ID for days and nights (and twilight/dawn) noting that each 'unit' is numbered consecutively regardless of type: Day1, Twilight_sunrise2, Night3, and so on - the key thing is that each has a unique ID for when you filter to days/nights and calculate things by each day/night
+template$day_night_unique <- rep(NA, nrow(template)) #create unique ID for days and nights (and twilight/dawn) noting that each 'unit' is numbered consecutively regardless of type: Day1, Twilight_sunrise2, Night3, and so on - the key thing is that each has a unique ID for when you filter to days/nights and calculate things by each day/night
 ##NB. the final row throws an error at present just because there is no "row + 1"...
+print(head(template))
 n <- 0
 day_no <- 1
 for(i in 1:nrow(template)) {
