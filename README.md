@@ -3,6 +3,8 @@ R functions to calculate bioclimatic variables by processing raw climate observa
 
 # 
 
+> ***Warning: under development as a 'bare bones' package intended for specific datasets***
+
 This package can be used by cloning as a folder to your desktop and starting an R project in that directory, or by package installation from github. The package imports functions from the packages stringr and dplyr (recommended to install these first) and can be installed as follows:
 ```
 library(devtools)
