@@ -7,6 +7,13 @@ Authors@R: c(
     person("Rhys", "Morgan", role = "aut"),
     person("Gunnar", "Keppel", role = "aut"))
 Maintainer: Greg Guerin <ggueri01@gmail.com>
+Depends: R (>= 3.1.0)
+Suggests:
+Imports:
+    dplyr, 
+    stringr,
+    stats,
+    utils
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: GPL-3
