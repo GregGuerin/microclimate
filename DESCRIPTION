@@ -1,6 +1,6 @@
 Package: microclimate
 Type: Package
-Title:Bioclimatic Variables From Microclimate Transects
+Title: Bioclimatic Variables From Microclimate Transects
 Version: 0.1.0
 Authors@R: c(
     person("Greg", "Guerin", email = "ggueri01@gmail.com", role = c("aut", "cre")),
