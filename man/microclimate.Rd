@@ -18,7 +18,13 @@ microclimate xxx\cr
 
 \emph{Functions in the microclimate package:}
 
-\code{\link{buffer.frags}} : Text.
+\code{\link{read_sensor_data}} : Text.
+
+\code{\link{format_sun_times}} : Text.
+
+\code{\link{format_sensor_data}} : Text.
+
+\code{\link{calculate_means}} : Text.
 
 \cr
 }
