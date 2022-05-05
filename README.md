@@ -1,6 +1,7 @@
 # microclimate
 R functions to calculate bioclimatic variables by processing raw climate observations from microclimate transects 
 
+# 
 
 This package can be used by cloning as a folder to your desktop and starting an R project in that directory, or by package installation from github. The package imports functions from the packages stringr and dplyr (recommended to install these first) and can be installed as follows:
 ```
@@ -14,7 +15,6 @@ Input data are temperature observations from sensors installed along microclimat
 
 To run the code with the example data (which must be cloned/downloaded to your desktop):
 ```
-
 ###############################################################
 #Step 1 - compile data from all sensors into one object and load sun times data
 
