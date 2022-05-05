@@ -95,6 +95,8 @@ assign_season <- function(x) {
 
 format_sensor_data <- function(template, rise_set, time_zone="ACDT", verbose=TRUE) {
 	
+  season <- NULL
+  
 #this function formats the merged data (especially date and time) for analysis (e.g. season) and adds in the sun times to assign night day etc
 	
 #Create new columns "Day" & "TimeNew"
@@ -224,7 +226,9 @@ return(template)
 ################################################
 
 calculate_means <- function(template) {
-	
+
+  day_night <- NULL
+  
 #temp calcs per sensor, season, day/night and unique day period (i.e. daily diurnal max...)
 #DAILY VALUES by day/night
 maxByday <- aggregate(template$Celsius.C., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=max)
