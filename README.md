@@ -10,7 +10,7 @@ install_github("GregGuerin/microclimate")
 library(microclimate)
 ``` 
 
-Input data are temperature observations from sensors installed along microclimate transects from the edge to interior of a patch of vegetation at distances of 0, 2, 5, 10, 20, 40 & 80 m. Data from each logger is a text file and location along the transect is assumed to be coded as site-transectNumber-Distance, e.g., KA-1-0 (Site 'KA', transect 1, 0 m from edge). If present (not in sample data), soil sensors are denoted with an S (e.g., KA-1-0S) and control observations outside of the vegetation are denoted as, e.g., KA-1-X.
+Input data are temperature observations from sensors installed along microclimate transects from the edge to interior of a patch of vegetation at distances of 0, 2, 5, 10, 20, 40 & 80 m. Data from each logger is a text file and location along the transect is assumed to be coded as site-transectNumber-Distance, e.g., KA-1-0 (Site 'KA', transect 1, 0 m from edge). If present (not in sample data), soil sensors are denoted with an S (e.g., KA-1-0S) and control observations outside of the vegetation are denoted as, e.g., KA-1-X. Note raw data format will vary between logging devices so see example data for currently used input data.
 
 
 To run the code with the example data (which must be cloned/downloaded to your desktop):
