@@ -18,7 +18,8 @@ To run the code with the example data (which must be cloned/downloaded to your d
 ## Step 1
 Compile data from all sensors into one object and load sun times data
 ```
-my.sensor.data <- read_sensor_data("./Sample_data/KA*") #input file path to set of .txt files with logged climate measurements
+my.sensor.data <- read_sensor_data("./Sample_data/KA*")
+#input file path to set of .txt files with logged climate measurements
 ```
 The 'my.sensor.data' object returned above contains all the data from the .txt files in the folder together in one data frame with the 'Sensor' field denoting which file/sensor it came from.
 
