@@ -643,6 +643,137 @@ maxByday2$rangeAH <- rangeBy2$rangeAH
 maxByday3$rangeAH <- rangeBy3$rangeAH
 maxByday4$rangeAH <- rangeBy4$rangeAH
 
+#####################Add more responses for RELATIVE humidity and add to the master tables:
+#############
+#minRH
+minBy <- aggregate(template$Humidity..rh., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=min)
+minBy <- minBy[do.call(order, minBy), ] #re-order more sensibly
+names(minBy) <- c("Sensor", "season", "day_night", "day_night_unique", "minRH") #daily minima
+minBy$Day <- template$Day[match(minBy$day_night_unique, template$day_night_unique)]
+
+#mean minima by category
+minBy2 <- aggregate(minBy$minRH, by=list(minBy$Sensor, minBy$season, minBy$day_night), FUN=mean)
+minBy2 <- minBy2[do.call(order, minBy2), ]
+names(minBy2) <- c("Sensor", "season", "day_night", "minRH")
+
+#mean min by sensor and day/night(i.e., overall 'annual' mean but not strictly so since the data may be more or less than a year...)
+minBy3 <- aggregate(minBy$minRH, by=list(minBy$Sensor, minBy$day_night), FUN=mean)
+minBy3 <- minBy3[do.call(order, minBy3), ]
+names(minBy3) <- c("Sensor", "day_night", "minRH")
+#
+minBy4 <- aggregate(minBy$minRH, by=list(minBy$Sensor, strptime(minBy$Day, format = "%Y-%m-%d")$mon, minBy$day_night), FUN=mean)
+minBy4 <- minBy4[do.call(order, minBy4), ]
+names(minBy4) <- c("Sensor", "month", "day_night", "minRH")
+
+#add to first dfs for convenience
+maxByday$minRH <- minBy$minRH
+maxByday2$minRH <- minBy2$minRH
+maxByday3$minRH <- minBy3$minRH
+maxByday4$minRH <- minBy4$minRH
+########################
+#############
+#meanRH
+meanBy <- aggregate(template$Humidity..rh., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=mean)
+meanBy <- meanBy[do.call(order, meanBy), ] #re-order more sensibly
+names(meanBy) <- c("Sensor", "season", "day_night", "day_night_unique", "meanRH") #daily minima
+meanBy$Day <- template$Day[match(meanBy$day_night_unique, template$day_night_unique)]
+
+#mean by category
+meanBy2 <- aggregate(meanBy$meanRH, by=list(meanBy$Sensor, meanBy$season, meanBy$day_night), FUN=mean)
+meanBy2 <- meanBy2[do.call(order, meanBy2), ]
+names(meanBy2) <- c("Sensor", "season", "day_night", "meanRH")
+
+#mean by sensor and day/night(i.e., overall 'annual' mean but not strictly so since the data may be more or less than a year...)
+meanBy3 <- aggregate(meanBy$meanRH, by=list(meanBy$Sensor, meanBy$day_night), FUN=mean)
+meanBy3 <- meanBy3[do.call(order, meanBy3), ]
+names(meanBy3) <- c("Sensor", "day_night", "meanRH")
+#
+meanBy4 <- aggregate(meanBy$meanRH, by=list(meanBy$Sensor, strptime(meanBy$Day, format = "%Y-%m-%d")$mon, meanBy$day_night), FUN=mean)
+meanBy4 <- meanBy4[do.call(order, meanBy4), ]
+names(meanBy4) <- c("Sensor", "month", "day_night", "meanRH")
+
+#add to first dfs for convenience
+maxByday$meanRH <- meanBy$meanRH
+maxByday2$meanRH <- meanBy2$meanRH
+maxByday3$meanRH <- meanBy3$meanRH
+maxByday4$meanRH <- meanBy4$meanRH
+########################
+#############
+#maxRH
+maxBy <- aggregate(template$Humidity..rh., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=max)
+maxBy <- maxBy[do.call(order, maxBy), ] #re-order more sensibly
+names(maxBy) <- c("Sensor", "season", "day_night", "day_night_unique", "maxRH") #daily minima
+maxBy$Day <- template$Day[match(maxBy$day_night_unique, template$day_night_unique)]
+
+#max by category
+maxBy2 <- aggregate(maxBy$maxRH, by=list(maxBy$Sensor, maxBy$season, maxBy$day_night), FUN=mean)
+maxBy2 <- maxBy2[do.call(order, maxBy2), ]
+names(maxBy2) <- c("Sensor", "season", "day_night", "maxRH")
+
+#max by sensor and day/night(i.e., overall 'annual' mean but not strictly so since the data may be more or less than a year...)
+maxBy3 <- aggregate(maxBy$maxRH, by=list(maxBy$Sensor, maxBy$day_night), FUN=mean)
+maxBy3 <- maxBy3[do.call(order, maxBy3), ]
+names(maxBy3) <- c("Sensor", "day_night", "maxRH")
+#
+maxBy4 <- aggregate(maxBy$maxRH, by=list(maxBy$Sensor, strptime(maxBy$Day, format = "%Y-%m-%d")$mon, maxBy$day_night), FUN=mean)
+maxBy4 <- maxBy4[do.call(order, maxBy4), ]
+names(maxBy4) <- c("Sensor", "month", "day_night", "maxRH")
+
+#add to first dfs for convenience
+maxByday$maxRH <- maxBy$maxRH
+maxByday2$maxRH <- maxBy2$maxRH
+maxByday3$maxRH <- maxBy3$maxRH
+maxByday4$maxRH <- maxBy4$maxRH
+########################
+#sdT
+sdBy <- aggregate(template$Humidity..rh., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=sd)
+sdBy <- sdBy[do.call(order, sdBy), ]
+names(sdBy) <- c("Sensor", "season", "day_night", "day_night_unique", "sdRH")
+sdBy$Day <- template$Day[match(sdBy$day_night_unique, template$day_night_unique)]
+#
+sdBy2 <- aggregate(sdBy$sdRH, by=list(sdBy$Sensor, sdBy$season, sdBy$day_night), FUN=function(x) {return(mean(na.omit(x)))})
+sdBy2 <- sdBy2[do.call(order, sdBy2), ]
+names(sdBy2) <- c("Sensor", "season", "day_night", "sdRH")
+#
+sdBy3 <- aggregate(sdBy$sdRH, by=list(sdBy$Sensor, sdBy$day_night), FUN=function(x) {return(mean(na.omit(x)))})
+sdBy3 <- sdBy3[do.call(order, sdBy3), ]
+names(sdBy3) <- c("Sensor", "day_night", "sdRH")
+#
+sdBy4 <- aggregate(sdBy$sdRH, by=list(sdBy$Sensor, strptime(sdBy$Day, format = "%Y-%m-%d")$mon, sdBy$day_night), FUN=function(x) {return(mean(na.omit(x)))})
+sdBy4 <- sdBy4[do.call(order, sdBy4), ]
+names(sdBy4) <- c("Sensor", "month", "day_night", "sdRH")
+#
+maxByday$sdRH <- sdBy$sdRH
+maxByday2$sdRH <- sdBy2$sdRH
+maxByday3$sdRH <- sdBy3$sdRH
+maxByday4$sdRH <- sdBy4$sdRH
+
+
+#min/max RANGE of RELATIVE Humidity (Note range and sd are quite correlated and both represent variation, CV is less correlated)
+rangeBy <- aggregate(template$Humidity..rh., by=list(template$Sensor, template$season, template$day_night, template$day_night_unique), FUN=function(x) abs(diff(range(x))))
+rangeBy <- rangeBy[do.call(order, rangeBy), ]
+names(rangeBy) <- c("Sensor", "season", "day_night", "day_night_unique", "rangeRH")
+rangeBy$Day <- template$Day[match(rangeBy$day_night_unique, template$day_night_unique)]
+
+#
+rangeBy2 <- aggregate(rangeBy$rangeRH, by=list(rangeBy$Sensor, rangeBy$season, rangeBy$day_night), FUN=mean)
+rangeBy2 <- rangeBy2[do.call(order, rangeBy2), ]
+names(rangeBy2) <- c("Sensor", "season", "day_night", "rangeRH")
+#
+rangeBy3 <- aggregate(rangeBy$rangeRH, by=list(rangeBy$Sensor, rangeBy$day_night), FUN=mean)
+rangeBy3 <- rangeBy3[do.call(order, rangeBy3), ]
+names(rangeBy3) <- c("Sensor", "day_night", "rangeRH")
+#
+rangeBy4 <- aggregate(rangeBy$rangeRH, by=list(rangeBy$Sensor, strptime(rangeBy$Day, format = "%Y-%m-%d")$mon, rangeBy$day_night), FUN=mean)
+rangeBy4 <- rangeBy4[do.call(order, rangeBy4), ]
+names(rangeBy4) <- c("Sensor", "month", "day_night", "rangeRH")
+#
+maxByday$rangeRH <- rangeBy$rangeRH
+maxByday2$rangeRH <- rangeBy2$rangeRH
+maxByday3$rangeRH <- rangeBy3$rangeRH
+maxByday4$rangeRH <- rangeBy4$rangeRH
+
+
 ########################
 #tidy up tables
 
@@ -650,23 +781,23 @@ maxByday4$rangeAH <- rangeBy4$rangeAH
 #daily
 maxByday <- subset(maxByday, day_night != "Twilight_sunrise") 
 maxByday <- maxByday[with(maxByday, order(Sensor, Day, day_night)),]
-maxByday <- maxByday[,c("Sensor", "Day", "season", "day_night", "day_night_unique", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH")]
+maxByday <- maxByday[,c("Sensor", "Day", "season", "day_night", "day_night_unique", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH", "maxRH",  "minRH",  "meanRH", "sdRH", "rangeRH")]
 #
 #month
 maxByday4 <- subset(maxByday4, day_night != "Twilight_sunrise") 
 maxByday4 <- maxByday4[with(maxByday4, order(Sensor, month, day_night)),]
-maxByday4 <- maxByday4[,c("Sensor", "month", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH")]
+maxByday4 <- maxByday4[,c("Sensor", "month", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH", "maxRH",  "minRH",  "meanRH", "sdRH", "rangeRH")]
 maxByday4$month <- month.name[maxByday4$month+1]
 #
 #season
 maxByday2 <- subset(maxByday2, day_night != "Twilight_sunrise") 
 maxByday2 <- maxByday2[with(maxByday2, order(Sensor, season, day_night)),]
-maxByday2 <- maxByday2[,c("Sensor", "season", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH")]
+maxByday2 <- maxByday2[,c("Sensor", "season", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH", "maxRH",  "minRH",  "meanRH", "sdRH", "rangeRH")]
 #
 #year
 maxByday3 <- subset(maxByday3, day_night != "Twilight_sunrise") 
 maxByday3 <- maxByday3[with(maxByday3, order(Sensor, day_night)),]
-maxByday3 <- maxByday3[,c("Sensor", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH")]
+maxByday3 <- maxByday3[,c("Sensor", "day_night", "transect", "distance", "type", "maxAH",  "minAH",  "meanAH", "sdAH", "rangeAH", "maxRH",  "minRH",  "meanRH", "sdRH", "rangeRH")]
 ######################
 #return result
 result <- list()
