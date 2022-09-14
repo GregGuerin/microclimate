@@ -487,17 +487,17 @@ maxByday$Day <- template$Day[match(maxByday$day_night_unique, template$day_night
 
 #mean max by sensor, season and day/night (i.e., mean of daily maxima in these categories)
 #SEASONAL VALUES by day/night
-maxByday2 <- aggregate(maxByday$Humidity..ah., by=list(maxByday$Sensor, maxByday$season, maxByday$day_night), FUN=mean)
+maxByday2 <- aggregate(maxByday$maxAH, by=list(maxByday$Sensor, maxByday$season, maxByday$day_night), FUN=mean)
 maxByday2 <- maxByday2[do.call(order, maxByday2), ]
 names(maxByday2) <- c("Sensor", "season", "day_night", "maxAH")
 
 #mean max by sensor and day/night(i.e., overall 'ANNUAL' mean but not strictly so since the data may be more or less than a year...)
-maxByday3 <- aggregate(maxByday$Humidity..ah., by=list(maxByday$Sensor, maxByday$day_night), FUN=mean)
+maxByday3 <- aggregate(maxByday$maxAH, by=list(maxByday$Sensor, maxByday$day_night), FUN=mean)
 maxByday3 <- maxByday3[do.call(order, maxByday3), ]
 names(maxByday3) <- c("Sensor", "day_night", "maxAH")
 
 #mean max by sensor, day/night and month (MONTHLY MEANs)
-maxByday4 <- aggregate(maxByday$Humidity..ah., by=list(maxByday$Sensor, strptime(maxByday$Day, format = "%Y-%m-%d")$mon, maxByday$day_night), FUN=mean)
+maxByday4 <- aggregate(maxByday$maxAH, by=list(maxByday$Sensor, strptime(maxByday$Day, format = "%Y-%m-%d")$mon, maxByday$day_night), FUN=mean)
 maxByday4 <- maxByday4[do.call(order, maxByday4), ]
 names(maxByday4) <- c("Sensor", "month", "day_night", "maxAH")
 
