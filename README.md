@@ -49,9 +49,11 @@ my.sensor.data <- format_sensor_data(my.sensor.data, rise_set)
 ```
 
 ## Step 4
-Iterate through sensor and day to get daily climate values for min / max / mean / standard deviation / range and then calculate mean values per night/day for month, season and 'year' (year at this state simply meaning all the data/dates)
+Iterate through sensor and day to get daily climate (temperature / humidity) values for min / max / mean / standard deviation / range and then calculate mean values per night/day for month, season and 'year' (year at this state simply meaning all the data/dates)
 ```
 temp_means <- calculate_means(my.sensor.data)
+
+humidity_means <- calculate_humidity(my.sensor.data)
 ```
 Returns a list of data frames each giving night/day max/mean/min/range/sd temps, respectively for $Day, $Month, $Season and $Year 
 
